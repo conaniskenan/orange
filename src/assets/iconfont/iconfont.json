@@ -1,0 +1,16 @@
+{
+  "id": "2527608",
+  "name": "orange",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1188466",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    }
+  ]
+}
