@@ -3,11 +3,12 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 02:37:49
- * @FilePath: /orange/src/components/header/index.js
+ * @LastEditTime: 2021-05-06 18:49:37
+ * @FilePath: /orange/src/components/header/index.jsx
  */
 import classnames from 'classnames'
 import React, { memo, useState } from 'react'
+import LoginButton from 'components/loginButton'
 import {
 	NavWrapper,
 	NavLeft,
@@ -79,6 +80,7 @@ const Header = memo(() => {
 						})}
 					></span>
 				</NavRightSearchWrapper>
+				<LoginButton className='loginBtn'></LoginButton>
 			</NavRight>
 		</NavWrapper>
 	)

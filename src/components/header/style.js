@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 21:02:19
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 02:32:19
+ * @LastEditTime: 2021-05-06 18:44:27
  * @FilePath: /orange/src/components/header/style.js
  */
 import styled from 'styled-components'
@@ -27,7 +27,7 @@ export const NavWrapper = styled.div`
 	}
 `
 export const NavLeft = styled.div`
-	width: 19rem;
+	min-width: 19rem;
 	position: relative;
 `
 export const NavLeftLogo = styled.div`
@@ -59,6 +59,7 @@ export const NavLeftLogo = styled.div`
 `
 export const NavCenter = styled.div`
 	flex: 6;
+	min-width: 10rem;
 	overflow: hidden;
 `
 export const NavCenterItem = styled.div`
@@ -84,6 +85,20 @@ export const NavCenterItem = styled.div`
 export const NavRight = styled.div`
 	flex: 3;
 	position: relative;
+	min-width: 40rem;
+	.loginBtn {
+		position: absolute;
+		right: 10%;
+		top: 50%;
+		transform: translateY(-50%);
+		height: 3rem;
+		line-height: 3rem;
+		width: 7rem;
+		font-size: 1.6rem;
+		text-align: center;
+		letter-spacing: 5px;
+		text-indent: 5px;
+	}
 `
 export const NavRightSearchWrapper = styled.div`
 	position: absolute;
