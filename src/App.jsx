@@ -2,14 +2,16 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 17:39:12
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-05 22:40:31
- * @FilePath: /orange/src/App.js
+ * @LastEditTime: 2021-05-07 23:47:10
+ * @FilePath: /orange/src/App.jsx
  */
 import React, { memo } from 'react'
-import Header from 'components/header'
+import { renderRoutes } from 'react-router-config'
+import { BrowserRouter } from 'react-router-dom'
+import routes from './router'
 
 const App = memo(() => {
-	return <Header />
+	return <BrowserRouter>{renderRoutes(routes)}</BrowserRouter>
 })
 
 export default App

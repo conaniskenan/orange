@@ -2,12 +2,11 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 21:02:19
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 18:44:27
+ * @LastEditTime: 2021-05-07 20:48:58
  * @FilePath: /orange/src/components/header/style.js
  */
 import styled from 'styled-components'
 import navImg from 'assets/img/header.png'
-import logo from 'assets/img/orange.png'
 
 export const NavWrapper = styled.div`
 	width: 100%;
@@ -30,33 +29,7 @@ export const NavLeft = styled.div`
 	min-width: 19rem;
 	position: relative;
 `
-export const NavLeftLogo = styled.div`
-	height: 4rem;
-	position: absolute;
-	width: 80%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	margin: auto;
-	background-image: url(${logo});
-	background-size: 4rem;
-	background-repeat: no-repeat;
-	transition: all 1s ease;
-	&:hover {
-		text-shadow: 0px 0px 1px hsl(48, 89%, 50%);
-	}
-	&::before {
-		content: '橘子新闻';
-		font-size: 2.7rem;
-		font-weight: bold;
-		position: absolute;
-		right: 5px;
-		top: 50%;
-		transform: translateY(-50%);
-		color: hsl(48, 89%, 70%);
-	}
-`
+
 export const NavCenter = styled.div`
 	flex: 6;
 	min-width: 10rem;

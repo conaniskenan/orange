@@ -3,12 +3,13 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 18:49:37
+ * @LastEditTime: 2021-05-07 20:49:16
  * @FilePath: /orange/src/components/header/index.jsx
  */
 import classnames from 'classnames'
 import React, { memo, useState } from 'react'
 import LoginButton from 'components/loginButton'
+import { withRouter } from 'react-router-dom'
 import {
 	NavWrapper,
 	NavLeft,
@@ -19,8 +20,9 @@ import {
 	NavRightSearch,
 	NavRightSearchWrapper,
 } from './style'
+import Logo from '../logo'
 
-const Header = memo(() => {
+const Header = memo(props => {
 	const [navList, setNavList] = useState([
 		'要闻',
 		'北京',
@@ -45,10 +47,14 @@ const Header = memo(() => {
 	const handleFocus = flag => {
 		setIsFocus(flag)
 	}
+	const toLogin = () => {
+		console.log(111)
+		props.history.push('/sign_in')
+	}
 	return (
 		<NavWrapper>
 			<NavLeft>
-				<NavLeftLogo></NavLeftLogo>
+				<Logo />
 			</NavLeft>
 			<NavCenter>
 				{navList.map((item, index) => {
@@ -80,10 +86,12 @@ const Header = memo(() => {
 						})}
 					></span>
 				</NavRightSearchWrapper>
-				<LoginButton className='loginBtn'></LoginButton>
+				<LoginButton className='loginBtn' onClick={toLogin}>
+					登录
+				</LoginButton>
 			</NavRight>
 		</NavWrapper>
 	)
 })
 
-export default Header
+export default withRouter(Header)

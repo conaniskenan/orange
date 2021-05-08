@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 22:31:57
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 18:48:34
+ * @LastEditTime: 2021-05-07 20:10:41
  * @FilePath: /orange/craco.config.js
  */
 const path = require('path')
@@ -13,6 +13,7 @@ module.exports = {
 			'@': resolve('src'),
 			components: resolve('src/components'),
 			assets: resolve('src/assets'),
+			pages: resolve('src/pages'),
 		},
 		resolve: {
 			extensions: ['.js', '.jsx', '.ts', '.tsx'],

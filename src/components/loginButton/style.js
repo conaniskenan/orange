@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-06 14:59:33
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-06 15:42:12
+ * @LastEditTime: 2021-05-07 20:46:26
  * @FilePath: /orange/src/components/loginButton/style.js
  */
 import styled from 'styled-components'
