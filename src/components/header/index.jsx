@@ -3,7 +3,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-07 20:49:16
+ * @LastEditTime: 2021-05-08 21:06:34
  * @FilePath: /orange/src/components/header/index.jsx
  */
 import classnames from 'classnames'
@@ -48,7 +48,6 @@ const Header = memo(props => {
 		setIsFocus(flag)
 	}
 	const toLogin = () => {
-		console.log(111)
 		props.history.push('/sign_in')
 	}
 	return (
