@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:54
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 16:41:19
+ * @LastEditTime: 2021-05-17 15:05:44
  * @FilePath: /orange/src/components/loginForm/style.js
  */
 import styled from 'styled-components'
@@ -13,6 +13,7 @@ export const InputWrapper = styled.div`
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(0 0 0 / 10%);
+	position: absolute;
 	> .icon-ren {
 		position: absolute;
 		left: 12.6%;

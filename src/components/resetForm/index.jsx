@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 21:34:52
+ * @LastEditTime: 2021-05-17 15:09:39
  * @FilePath: /orange/src/components/resetForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
@@ -70,7 +70,7 @@ const ResetForm = props => {
 			<span className='iconfont icon-mima mima2'></span>
 			<span className='iconfont icon-webicon205'></span>
 			<span className='iconfont icon-yanzhengma'></span>
-			<Bottom onClick={() => props.history.push('/sign_in')}>
+			<Bottom onClick={() => props.history.push('/login')}>
 				返回登录注册
 			</Bottom>
 		</InputWrapper>

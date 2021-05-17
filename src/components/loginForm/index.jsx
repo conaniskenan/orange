@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:43
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 19:13:39
+ * @LastEditTime: 2021-05-17 15:08:48
  * @FilePath: /orange/src/components/loginForm/index.jsx
  */
 import React from 'react'
@@ -22,17 +22,21 @@ const LoginForm = props => {
 			<Top>
 				<div
 					className='active'
-					onClick={() => props.history.push('/sign_in')}
+					onClick={() => props.history.push('/login')}
 				>
 					登录
 				</div>
 				<div>·</div>
-				<div onClick={() => props.history.push('/sign_up')}>注册</div>
+				<div onClick={() => props.history.push('/login/sign_up')}>
+					注册
+				</div>
 			</Top>
 			<Center>
 				<PhoneInput />
 				<PasswordInput />
-				<ForgetPassword onClick={() => props.history.push('/reset')}>
+				<ForgetPassword
+					onClick={() => props.history.push('/login/reset')}
+				>
 					忘记密码?
 				</ForgetPassword>
 			</Center>

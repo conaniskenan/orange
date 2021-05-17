@@ -3,7 +3,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 00:11:30
+ * @LastEditTime: 2021-05-17 13:45:25
  * @FilePath: /orange/src/components/header/index.jsx
  */
 import classnames from 'classnames'
@@ -42,7 +42,7 @@ const Header = memo(props => {
 		setIsFocus(flag)
 	}
 	const toLogin = () => {
-		props.history.push('/sign_in')
+		props.history.push('/login')
 	}
 	return (
 		<NavWrapper>

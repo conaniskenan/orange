@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-16 22:58:38
+ * @LastEditTime: 2021-05-17 15:09:27
  * @FilePath: /orange/src/components/registerForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
@@ -48,11 +48,11 @@ const RegisterForm = props => {
 	return (
 		<InputWrapper {...props}>
 			<Top>
-				<div onClick={() => props.history.push('/sign_in')}>登录</div>
+				<div onClick={() => props.history.push('/login')}>登录</div>
 				<div>·</div>
 				<div
 					className='active'
-					onClick={() => props.history.push('/sign_up')}
+					onClick={() => props.history.push('/login/sign_up')}
 				>
 					注册
 				</div>

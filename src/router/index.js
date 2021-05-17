@@ -2,13 +2,23 @@
  * @Author: hypocrisy
  * @Date: 2021-05-06 16:04:22
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-12 21:26:22
+ * @LastEditTime: 2021-05-17 15:14:11
  * @FilePath: /orange/src/router/index.js
  */
 import { lazy } from 'react'
-import Home from 'pages/home'
 import SuspenseCpn from 'components/suspenseCpn'
-const Login = SuspenseCpn(lazy(() => import('pages/Login')))
+import Home from 'pages/home'
+const Login = SuspenseCpn(lazy(() => import('pages/login')))
+const LoginForm = SuspenseCpn(
+	lazy(() => import('components/loginForm'))
+)
+const RegisterForm = SuspenseCpn(
+	lazy(() => import('components/registerForm'))
+)
+const ResetForm = SuspenseCpn(
+	lazy(() => import('components/resetForm'))
+)
+
 const routes = [
 	{
 		path: '/',
@@ -16,16 +26,30 @@ const routes = [
 		component: Home,
 	},
 	{
-		path: '/sign_in',
+		path: '/login',
 		component: Login,
-	},
-	{
-		path: '/sign_up',
-		component: Login,
-	},
-	{
-		path: '/reset',
-		component: Login,
+		routes: [
+			// {
+			// 	path: '/login',
+			// 	exact: true,
+			// 	render: () => {
+			// 		return <Redirect to={'/login/sign_in'}></Redirect>
+			// 	},
+			// },
+			{
+				path: '/login',
+				exact: true,
+				component: LoginForm,
+			},
+			{
+				path: '/login/sign_up',
+				component: RegisterForm,
+			},
+			{
+				path: '/login/reset',
+				component: ResetForm,
+			},
+		],
 	},
 ]
 

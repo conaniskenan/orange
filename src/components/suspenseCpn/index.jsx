@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
 const SuspenseCpn = Cpn => {
-	return () => {
+	return props => {
 		return (
 			<Suspense fallback={<div></div>}>
-				<Cpn />
+				<Cpn {...props} />
 			</Suspense>
 		)
 	}
