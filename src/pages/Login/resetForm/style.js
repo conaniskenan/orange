@@ -12,6 +12,7 @@ export const InputWrapper = styled.div`
 	height: 52rem;
 	background-color: #fff;
 	border-radius: 4px;
+	position: absolute;
 	box-shadow: 0 0 8px rgb(0 0 0 / 10%);
 	> .icon-ren {
 		position: absolute;

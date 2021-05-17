@@ -2,14 +2,14 @@
  * @Author: hypocrisy
  * @Date: 2021-05-16 23:16:39
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 00:01:29
+ * @LastEditTime: 2021-05-18 01:40:42
  * @FilePath: /orange/src/api/index.js
  */
 import axios from 'axios'
 
 //axios.defaults.headers.post['Content-Type'] = 'application/json'
 // axios.defaults.headers.common["token"] = localStorage.getItem("token")
-axios.defaults.baseURL = 'http://106.12.214.87/cors'
+axios.defaults.baseURL = process.env.REACT_APP_URL
 axios.interceptors.request.use(
 	config => {
 		// * 判断是否存在token，如果存在的话，则每个http header都加上token

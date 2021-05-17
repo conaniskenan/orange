@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 20:53:24
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 15:39:12
- * @FilePath: /orange/src/pages/Login/style.js
+ * @LastEditTime: 2021-05-18 01:25:35
+ * @FilePath: /orange/src/pages/login/style.js
  */
 import styled from 'styled-components'
 import Img from 'assets/img/orange.png'
@@ -36,11 +36,9 @@ export const Center = styled.div`
 	}
 	@media only screen and (max-width: 65rem) {
 		.form {
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
+			position: absolute;
+			top: 10%;
+			left: 30%;
 		}
 	}
 `

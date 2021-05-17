@@ -1,6 +1,7 @@
 .swiper-container {
 	width: 100%;
 	height: 35rem;
+	cursor: pointer;
 }
 
 .swiper-button-prev {

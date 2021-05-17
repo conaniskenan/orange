@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:31:21
- * @FilePath: /orange/src/components/resetForm/index.jsx
+ * @LastEditTime: 2021-05-18 01:01:06
+ * @FilePath: /orange/src/pages/login/resetForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
 import {
@@ -67,7 +67,7 @@ const ResetForm = props => {
 					</button>
 				)}
 			</Center>
-			<RegisterButton>注册</RegisterButton>
+			<RegisterButton>重置密码</RegisterButton>
 			<span className='iconfont icon-mima mima1'></span>
 			<span className='iconfont icon-mima mima2'></span>
 			<span className='iconfont icon-webicon205'></span>

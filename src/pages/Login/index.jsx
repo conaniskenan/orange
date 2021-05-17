@@ -3,8 +3,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 20:26:57
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:17:47
- * @FilePath: /orange/src/pages/Login/index.jsx
+ * @LastEditTime: 2021-05-18 01:17:18
+ * @FilePath: /orange/src/pages/login/index.jsx
  */
 import React from 'react'
 import { renderRoutes } from 'react-router-config'

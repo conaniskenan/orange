@@ -1,15 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import swiper from 'swiper'
+import { useSelector, shallowEqual } from 'react-redux'
+
 import 'swiper/dist/css/swiper.min.css'
 import 'swiper/dist/js/swiper.min.js'
 import './style.css'
 
 const Swiper = () => {
+	const { newsRanList } = useSelector(
+		state => ({
+			newsRanList: state
+				.getIn(['newsInfo', 'newsRanList'])
+				.toJS()
+				.slice(0, 5),
+		}),
+		shallowEqual
+	)
 	useEffect(() => {
 		new swiper('.swiper-container', {
 			loop: true, // 循环模式选项
 			autoplay: {
-				delay: 1000,
+				delay: 3000,
 				stopOnLastSlide: false,
 				disableOnInteraction: false,
 			},
@@ -29,15 +41,26 @@ const Swiper = () => {
 			observer: true, //修改swiper自己或子元素时，自动初始化swiper
 			observeParents: true, //修改swiper的父元素时，自动初始化swiper
 		})
-	}, [])
+	}, [newsRanList])
 	return (
 		<div className='swiper-container'>
 			<div className='swiper-wrapper'>
-				<div className='swiper-slide swiper-slide1'></div>
-				<div className='swiper-slide swiper-slide2'></div>
-				<div className='swiper-slide swiper-slide3'></div>
-				<div className='swiper-slide swiper-slide4'></div>
-				<div className='swiper-slide swiper-slide5'></div>
+				{newsRanList.map((item, index) => {
+					return (
+						<div
+							className={`swiper-slide swiper-slide${index + 1}`}
+							key={item.id}
+						>
+							<img
+								src={`${process.env.REACT_APP_URLP}/file/get/picture/${item.photo}`}
+								alt={`${item.title}`}
+								title={`${item.title}`}
+								width='100%'
+								height='100%'
+							/>
+						</div>
+					)
+				})}
 			</div>
 			{/* <!-- 如果需要分页器 --> */}
 			<div className='swiper-pagination'></div>
