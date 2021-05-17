@@ -3,13 +3,14 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 13:45:25
- * @FilePath: /orange/src/components/header/index.jsx
+ * @LastEditTime: 2021-05-17 22:46:44
+ * @FilePath: /orange/src/pages/home/header/index.jsx
  */
 import classnames from 'classnames'
 import React, { memo, useState, useEffect } from 'react'
-import LoginButton from 'components/loginButton'
 import { withRouter } from 'react-router-dom'
+import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import LoginButton from 'components/loginButton'
 import {
 	NavWrapper,
 	NavLeft,
@@ -19,20 +20,20 @@ import {
 	NavRightSearch,
 	NavRightSearchWrapper,
 } from './style'
-import Logo from '../logo'
-import { getNewsPlate } from '@/api/news'
+import Logo from 'components/logo'
+import { getList } from './store/actionCreators'
 
 const Header = memo(props => {
-	const [navList, setNavList] = useState([])
+	const { newsPlate } = useSelector(
+		state => ({
+			newsPlate: state.getIn(['header', 'newsPlate']).toJS(),
+		}),
+		shallowEqual
+	)
+	const dispatch = useDispatch()
 	useEffect(() => {
-		getNewsPlate().then(res => {
-			const list = []
-			for (const item of res.list) {
-				list.push(item.name)
-			}
-			setNavList(list)
-		})
-	}, [])
+		dispatch(getList())
+	}, [dispatch])
 	const [currentIndex, setCurrentIndex] = useState(-1)
 	const [isFocus, setIsFocus] = useState(false)
 	const handleItemClick = index => {
@@ -50,7 +51,7 @@ const Header = memo(props => {
 				<Logo />
 			</NavLeft>
 			<NavCenter>
-				{navList.map((item, index) => {
+				{newsPlate.map((item, index) => {
 					return (
 						<NavCenterItem
 							key={item}

@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 21:02:19
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-07 20:48:58
- * @FilePath: /orange/src/components/header/style.js
+ * @LastEditTime: 2021-05-17 21:25:13
+ * @FilePath: /orange/src/pages/home/header/style.js
  */
 import styled from 'styled-components'
 import navImg from 'assets/img/header.png'
@@ -11,10 +11,12 @@ import navImg from 'assets/img/header.png'
 export const NavWrapper = styled.div`
 	width: 100%;
 	height: 7.8rem;
+	background-color: #fff;
 	border-bottom: 1px solid #ebebeb;
 	box-shadow: 0 1px 2px hsl(0deg 0% 60% / 5%);
 	position: fixed;
 	display: flex;
+	z-index: 1030;
 	&::before {
 		content: '';
 		background-image: url(${navImg});

@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-06 16:04:22
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:14:11
+ * @LastEditTime: 2021-05-17 15:38:36
  * @FilePath: /orange/src/router/index.js
  */
 import { lazy } from 'react'
@@ -10,13 +10,13 @@ import SuspenseCpn from 'components/suspenseCpn'
 import Home from 'pages/home'
 const Login = SuspenseCpn(lazy(() => import('pages/login')))
 const LoginForm = SuspenseCpn(
-	lazy(() => import('components/loginForm'))
+	lazy(() => import('pages/login/loginForm'))
 )
 const RegisterForm = SuspenseCpn(
-	lazy(() => import('components/registerForm'))
+	lazy(() => import('pages/login/registerForm'))
 )
 const ResetForm = SuspenseCpn(
-	lazy(() => import('components/resetForm'))
+	lazy(() => import('pages/login/resetForm'))
 )
 
 const routes = [

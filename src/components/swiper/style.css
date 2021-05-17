@@ -1,0 +1,35 @@
+.swiper-container {
+	width: 100%;
+	height: 35rem;
+}
+
+.swiper-button-prev {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.swiper-button-next {
+	width: 2.5rem;
+	height: 2.5rem;
+}
+
+.swiper-slide1 {
+	/* background-color: rgb(211, 64, 64); */
+	background: center no-repeat url('assets/img/orange.png');
+}
+
+.swiper-slide2 {
+	background-color: rgb(230, 230, 111);
+}
+
+.swiper-slide3 {
+	background-color: rgb(197, 177, 177);
+}
+
+.swiper-slide4 {
+	background-color: rgb(114, 53, 53);
+}
+
+.swiper-slide5 {
+	background-color: rgb(117, 163, 113);
+}

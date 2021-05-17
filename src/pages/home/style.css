@@ -1,0 +1,7 @@
+.main {
+  margin-top: 8rem;
+  position: absolute;
+  z-index: -999;
+  left: 50%;
+  transform: translateX(-50%)
+}

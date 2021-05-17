@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:09:27
+ * @LastEditTime: 2021-05-17 15:31:36
  * @FilePath: /orange/src/components/registerForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
@@ -16,7 +16,6 @@ import {
 	PasswordInput,
 	RegisterButton,
 } from './style'
-import { withRouter } from 'react-router-dom'
 import { useDebounce } from '@/utils'
 
 const RegisterForm = props => {
@@ -24,6 +23,9 @@ const RegisterForm = props => {
 	const [isphone, setIsPhone] = useState(false)
 	const [checkMsg, setCheckMsg] = useState('发送验证码')
 	const deboucedPhone = useDebounce(phone, 0)
+	useEffect(() => {
+		document.title = '注册 - 橘子新闻'
+	}, [])
 	useEffect(() => {
 		if (/^1[3456789]\d{9}$/.test(deboucedPhone)) {
 			setIsPhone(true)
@@ -82,4 +84,4 @@ const RegisterForm = props => {
 	)
 }
 
-export default withRouter(RegisterForm)
+export default RegisterForm

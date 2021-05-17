@@ -2,10 +2,10 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:43
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:08:48
+ * @LastEditTime: 2021-05-17 15:31:52
  * @FilePath: /orange/src/components/loginForm/index.jsx
  */
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	InputWrapper,
 	Top,
@@ -15,8 +15,10 @@ import {
 	ForgetPassword,
 	LoginButton,
 } from './style'
-import { withRouter } from 'react-router-dom'
 const LoginForm = props => {
+	useEffect(() => {
+		document.title = '登录 - 橘子新闻'
+	}, [])
 	return (
 		<InputWrapper {...props}>
 			<Top>
@@ -47,4 +49,4 @@ const LoginForm = props => {
 	)
 }
 
-export default withRouter(LoginForm)
+export default LoginForm

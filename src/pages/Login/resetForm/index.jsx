@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:09:39
+ * @LastEditTime: 2021-05-17 15:31:21
  * @FilePath: /orange/src/components/resetForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
@@ -17,14 +17,16 @@ import {
 	RegisterButton,
 	Bottom,
 } from './style'
-import { withRouter } from 'react-router-dom'
 import { useDebounce } from '@/utils'
 
 const ResetForm = props => {
 	const [phone, setPhone] = useState('')
 	const [isphone, setIsPhone] = useState(false)
 	const [checkMsg, setCheckMsg] = useState('发送验证码')
-	const deboucedPhone = useDebounce(phone, 500)
+	const deboucedPhone = useDebounce(phone, 0)
+	useEffect(() => {
+		document.title = '重置密码 - 橘子新闻'
+	}, [])
 	useEffect(() => {
 		if (/^1[3456789]\d{9}$/.test(deboucedPhone)) {
 			setIsPhone(true)
@@ -77,4 +79,4 @@ const ResetForm = props => {
 	)
 }
 
-export default withRouter(ResetForm)
+export default ResetForm
