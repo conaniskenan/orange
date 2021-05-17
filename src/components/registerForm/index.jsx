@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 18:56:55
+ * @LastEditTime: 2021-05-16 22:58:38
  * @FilePath: /orange/src/components/registerForm/index.jsx
  */
 import React, { useEffect, useState } from 'react'
@@ -23,7 +23,7 @@ const RegisterForm = props => {
 	const [phone, setPhone] = useState('')
 	const [isphone, setIsPhone] = useState(false)
 	const [checkMsg, setCheckMsg] = useState('发送验证码')
-	const deboucedPhone = useDebounce(phone, 500)
+	const deboucedPhone = useDebounce(phone, 0)
 	useEffect(() => {
 		if (/^1[3456789]\d{9}$/.test(deboucedPhone)) {
 			setIsPhone(true)

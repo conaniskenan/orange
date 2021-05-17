@@ -3,11 +3,11 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 21:06:34
+ * @LastEditTime: 2021-05-17 00:11:30
  * @FilePath: /orange/src/components/header/index.jsx
  */
 import classnames from 'classnames'
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import LoginButton from 'components/loginButton'
 import { withRouter } from 'react-router-dom'
 import {
@@ -15,30 +15,24 @@ import {
 	NavLeft,
 	NavCenter,
 	NavRight,
-	NavLeftLogo,
 	NavCenterItem,
 	NavRightSearch,
 	NavRightSearchWrapper,
 } from './style'
 import Logo from '../logo'
+import { getNewsPlate } from '@/api/news'
 
 const Header = memo(props => {
-	const [navList, setNavList] = useState([
-		'要闻',
-		'北京',
-		'娱乐',
-		'体育',
-		'军事',
-		'国际',
-		'NBA',
-		'科技',
-		'汽车',
-		'财经',
-		'时尚',
-		'游戏',
-		'动漫',
-		'政务',
-	])
+	const [navList, setNavList] = useState([])
+	useEffect(() => {
+		getNewsPlate().then(res => {
+			const list = []
+			for (const item of res.list) {
+				list.push(item.name)
+			}
+			setNavList(list)
+		})
+	}, [])
 	const [currentIndex, setCurrentIndex] = useState(-1)
 	const [isFocus, setIsFocus] = useState(false)
 	const handleItemClick = index => {
