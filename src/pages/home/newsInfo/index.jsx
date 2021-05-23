@@ -1,34 +1,49 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /*
  * @Author: hypocrisy
  * @Date: 2021-05-17 21:29:03
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-18 02:01:00
+ * @LastEditTime: 2021-05-20 21:07:24
  * @FilePath: /orange/src/pages/home/newsInfo/index.jsx
  */
-import React, { memo, useEffect } from 'react'
-import { useDispatch, useSelector, shallowEqual } from 'react-redux'
+import React, { memo, useEffect, useState } from 'react'
+import { useSelector, shallowEqual } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { InfoWrapper, Title, Summary, Footer, Img } from './style'
-import { getList } from './store/actionCreators'
 import { getTime } from '@/utils'
-const NewsInfo = memo(() => {
-	const { newsRanList } = useSelector(
+
+const NewsInfo = memo(props => {
+	const [renderList, setRenderList] = useState([])
+	const { newsRandList, newsModelList } = useSelector(
 		state => ({
-			newsRanList: state.getIn(['newsInfo', 'newsRanList']).toJS(),
+			newsRandList: state.getIn(['home', 'newsRandList']),
+			newsModelList: state.getIn(['home', 'newsModelList']),
 		}),
 		shallowEqual
 	)
-	const dispatch = useDispatch()
 	useEffect(() => {
-		dispatch(getList())
-	}, [dispatch])
-	return newsRanList.map(item => {
+		if (!props.location.search) {
+			setRenderList(newsRandList?.toJS())
+		} else {
+			setRenderList(newsModelList?.toJS())
+		}
+	}, [newsRandList, newsModelList])
+	return renderList?.map(item => {
 		return (
-			<InfoWrapper key={item.id}>
+			<InfoWrapper
+				key={item.id}
+				onClick={() => {
+					props.history.push({
+						pathname: `/news/${item.id}`,
+						state: item,
+					})
+				}}
+			>
 				<Title>{item.title}</Title>
 				<Summary>{item.digest}</Summary>
 				<Img>
 					<img
-						src={`${process.env.REACT_APP_URLP}/file/get/picture/${item.photo}`}
+						src={`${process.env.REACT_APP_URLP}/file/get/picture/${item?.photo}`}
 						alt=''
 						width='100%'
 						height='100%'
@@ -36,7 +51,7 @@ const NewsInfo = memo(() => {
 				</Img>
 				<Footer className='footer'>
 					<div>橘子新闻网</div>
-					<div>{item.modelName}</div>
+					<div>分类:{item.modelName}</div>
 					<div>{getTime(item.createTime)}</div>
 					<div>评论:{item.comment ?? 0}</div>
 					<div>点赞:{item.star ?? 0}</div>
@@ -47,4 +62,4 @@ const NewsInfo = memo(() => {
 	})
 })
 
-export default NewsInfo
+export default withRouter(NewsInfo)

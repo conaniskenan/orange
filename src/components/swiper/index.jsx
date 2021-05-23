@@ -2,18 +2,19 @@
 import React, { useEffect } from 'react'
 import swiper from 'swiper'
 import { useSelector, shallowEqual } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import 'swiper/dist/css/swiper.min.css'
 import 'swiper/dist/js/swiper.min.js'
 import './style.css'
 
-const Swiper = () => {
+const Swiper = props => {
 	const { newsRanList } = useSelector(
 		state => ({
 			newsRanList: state
-				.getIn(['newsInfo', 'newsRanList'])
-				.toJS()
-				.slice(0, 5),
+				.getIn(['home', 'newsRandList'])
+				?.toJS()
+				?.slice(0, 5),
 		}),
 		shallowEqual
 	)
@@ -45,14 +46,20 @@ const Swiper = () => {
 	return (
 		<div className='swiper-container'>
 			<div className='swiper-wrapper'>
-				{newsRanList.map((item, index) => {
+				{newsRanList?.map((item, index) => {
 					return (
 						<div
 							className={`swiper-slide swiper-slide${index + 1}`}
 							key={item.id}
 						>
 							<img
-								src={`${process.env.REACT_APP_URLP}/file/get/picture/${item.photo}`}
+								onClick={() => {
+									props.history.push({
+										pathname: `/news/${item.id}`,
+										state: item,
+									})
+								}}
+								src={`${process.env.REACT_APP_URLP}/file/get/picture/${item?.photo}`}
 								alt={`${item.title}`}
 								title={`${item.title}`}
 								width='100%'
@@ -71,4 +78,4 @@ const Swiper = () => {
 	)
 }
 
-export default Swiper
+export default withRouter(Swiper)

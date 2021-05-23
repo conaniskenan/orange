@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-16 23:16:39
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-18 01:40:42
+ * @LastEditTime: 2021-05-20 22:17:24
  * @FilePath: /orange/src/api/index.js
  */
 import axios from 'axios'
@@ -15,7 +15,7 @@ axios.interceptors.request.use(
 		// * 判断是否存在token，如果存在的话，则每个http header都加上token
 		// * token会在登录之后存储在本地
 		if (localStorage.token) {
-			config.headers['Authorization'] = localStorage.token
+			config.headers['Authorization'] = `Bearer ${localStorage.token}`
 		}
 		return config
 	},
@@ -23,9 +23,15 @@ axios.interceptors.request.use(
 		return Promise.reject(err)
 	}
 )
+const instance1 = axios.create({
+	baseURL: process.env.REACT_APP_URL,
+})
+const instance2 = axios.create({
+	baseURL: process.env.REACT_APP_URLP,
+})
 export const get = (url, params = {}) => {
 	return new Promise((resolve, reject) => {
-		axios
+		instance1
 			.get(url, {
 				params: params,
 			})
@@ -39,7 +45,33 @@ export const get = (url, params = {}) => {
 }
 export const post = (url, params = {}) => {
 	return new Promise((resolve, reject) => {
-		axios
+		instance1
+			.post(url, params)
+			.then(res => {
+				resolve(res.data)
+			})
+			.catch(err => {
+				reject(err.data)
+			})
+	})
+}
+export const getp = (url, params = {}) => {
+	return new Promise((resolve, reject) => {
+		instance2
+			.get(url, {
+				params: params,
+			})
+			.then(res => {
+				resolve(res.data)
+			})
+			.catch(err => {
+				reject(err.data)
+			})
+	})
+}
+export const postp = (url, params = {}) => {
+	return new Promise((resolve, reject) => {
+		instance2
 			.post(url, params)
 			.then(res => {
 				resolve(res.data)

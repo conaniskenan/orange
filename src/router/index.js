@@ -2,11 +2,12 @@
  * @Author: hypocrisy
  * @Date: 2021-05-06 16:04:22
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:38:36
+ * @LastEditTime: 2021-05-20 19:51:43
  * @FilePath: /orange/src/router/index.js
  */
 import { lazy } from 'react'
 import SuspenseCpn from 'components/suspenseCpn'
+import { Redirect } from 'react-router-dom'
 import Home from 'pages/home'
 const Login = SuspenseCpn(lazy(() => import('pages/login')))
 const LoginForm = SuspenseCpn(
@@ -18,12 +19,23 @@ const RegisterForm = SuspenseCpn(
 const ResetForm = SuspenseCpn(
 	lazy(() => import('pages/login/resetForm'))
 )
-
+const NewsDetail = SuspenseCpn(lazy(() => import('pages/newsDetail')))
 const routes = [
 	{
 		path: '/',
 		exact: true,
+		render: () => {
+			return <Redirect to={'/news'}></Redirect>
+		},
+	},
+	{
+		path: '/news',
+		exact: true,
 		component: Home,
+	},
+	{
+		path: '/news/:id',
+		component: NewsDetail,
 	},
 	{
 		path: '/login',

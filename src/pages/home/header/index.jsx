@@ -1,12 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /*
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 22:46:44
+ * @LastEditTime: 2021-05-23 19:24:12
  * @FilePath: /orange/src/pages/home/header/index.jsx
  */
 import classnames from 'classnames'
+import qs from 'qs'
 import React, { memo, useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
@@ -21,12 +23,14 @@ import {
 	NavRightSearchWrapper,
 } from './style'
 import Logo from 'components/logo'
-import { getList } from './store/actionCreators'
+import { getList, getModelList } from '../store/actionCreators'
 
 const Header = memo(props => {
+	const [currentIndex, setCurrentIndex] = useState(-1)
+	const [isFocus, setIsFocus] = useState(false)
 	const { newsPlate } = useSelector(
 		state => ({
-			newsPlate: state.getIn(['header', 'newsPlate']).toJS(),
+			newsPlate: state.getIn(['home', 'newsPlate']),
 		}),
 		shallowEqual
 	)
@@ -34,10 +38,16 @@ const Header = memo(props => {
 	useEffect(() => {
 		dispatch(getList())
 	}, [dispatch])
-	const [currentIndex, setCurrentIndex] = useState(-1)
-	const [isFocus, setIsFocus] = useState(false)
+	useEffect(() => {
+		let search = props.location.search
+		search &&
+			dispatch(
+				getModelList(qs.parse(search.slice(1, search.length)).model)
+			)
+	}, [currentIndex])
 	const handleItemClick = index => {
 		setCurrentIndex(index)
+		props.history.push(`/news?model=${index + 1}`)
 	}
 	const handleFocus = flag => {
 		setIsFocus(flag)
@@ -48,7 +58,7 @@ const Header = memo(props => {
 	return (
 		<NavWrapper>
 			<NavLeft>
-				<Logo />
+				<Logo onClick={() => props.history.push('/')} />
 			</NavLeft>
 			<NavCenter>
 				{newsPlate.map((item, index) => {
