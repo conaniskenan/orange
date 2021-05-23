@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:54
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:05:44
- * @FilePath: /orange/src/components/loginForm/style.js
+ * @LastEditTime: 2021-05-23 21:05:01
+ * @FilePath: /orange/src/pages/login/loginForm/style.js
  */
 import styled from 'styled-components'
 
@@ -94,7 +94,7 @@ export const Center = styled.div`
 `
 export const PhoneInput = styled.input.attrs({
 	type: 'text',
-	placeholder: '手机号',
+	placeholder: '用户名',
 })`
 	border-bottom: none !important;
 `

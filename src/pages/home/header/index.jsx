@@ -4,7 +4,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-23 19:24:12
+ * @LastEditTime: 2021-05-23 22:55:26
  * @FilePath: /orange/src/pages/home/header/index.jsx
  */
 import classnames from 'classnames'
@@ -23,6 +23,7 @@ import {
 	NavRightSearchWrapper,
 } from './style'
 import Logo from 'components/logo'
+import UserName from 'components/userName'
 import { getList, getModelList } from '../store/actionCreators'
 
 const Header = memo(props => {
@@ -90,9 +91,13 @@ const Header = memo(props => {
 						})}
 					></span>
 				</NavRightSearchWrapper>
-				<LoginButton className='loginBtn' onClick={toLogin}>
-					登录
-				</LoginButton>
+				{localStorage.token ? (
+					<UserName className='user'/>
+				) : (
+					<LoginButton className='loginBtn' onClick={toLogin}>
+						登录
+					</LoginButton>
+				)}
 			</NavRight>
 		</NavWrapper>
 	)

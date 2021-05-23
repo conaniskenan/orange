@@ -9,9 +9,9 @@ import 'swiper/dist/js/swiper.min.js'
 import './style.css'
 
 const Swiper = props => {
-	const { newsRanList } = useSelector(
+	const { newsRandList } = useSelector(
 		state => ({
-			newsRanList: state
+			newsRandList: state
 				.getIn(['home', 'newsRandList'])
 				?.toJS()
 				?.slice(0, 5),
@@ -35,18 +35,14 @@ const Swiper = props => {
 				nextEl: '.swiper-button-next ',
 				prevEl: '.swiper-button-prev',
 			},
-			// 如果需要滚动条
-			// scrollbar: {
-			// 	el: '.swiper-scrollbar',
-			// },
 			observer: true, //修改swiper自己或子元素时，自动初始化swiper
 			observeParents: true, //修改swiper的父元素时，自动初始化swiper
 		})
-	}, [newsRanList])
+	}, [newsRandList])
 	return (
 		<div className='swiper-container'>
 			<div className='swiper-wrapper'>
-				{newsRanList?.map((item, index) => {
+				{newsRandList.map((item, index) => {
 					return (
 						<div
 							className={`swiper-slide swiper-slide${index + 1}`}

@@ -2,10 +2,10 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 15:31:36
- * @FilePath: /orange/src/components/registerForm/index.jsx
+ * @LastEditTime: 2021-05-24 00:27:39
+ * @FilePath: /orange/src/pages/login/registerForm/index.jsx
  */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
 	InputWrapper,
 	Top,
@@ -17,12 +17,16 @@ import {
 	RegisterButton,
 } from './style'
 import { useDebounce } from '@/utils'
+import { register, checkNumber } from '@/api/users'
 
 const RegisterForm = props => {
 	const [phone, setPhone] = useState('')
 	const [isphone, setIsPhone] = useState(false)
 	const [checkMsg, setCheckMsg] = useState('发送验证码')
 	const deboucedPhone = useDebounce(phone, 0)
+	const userRef = useRef(null)
+	const checkRef = useRef(null)
+	const pwdRef = useRef(null)
 	useEffect(() => {
 		document.title = '注册 - 橘子新闻'
 	}, [])
@@ -46,6 +50,22 @@ const RegisterForm = props => {
 				setCheckMsg(`重新发送`)
 			}
 		}, 1000)
+		checkNumber(phone)
+	}
+	const handleRegister = () => {
+		console.log(123)
+		register({
+			name: userRef.current.value,
+			password: pwdRef.current.value,
+			phone,
+			code: parseInt(checkRef.current.value),
+		}).then(res => {
+			if (res.code === 200) {
+				props.history.push('/login')
+			} else {
+				alert('注册失败')
+			}
+		})
 	}
 	return (
 		<InputWrapper {...props}>
@@ -60,13 +80,13 @@ const RegisterForm = props => {
 				</div>
 			</Top>
 			<Center>
-				<NickInput />
+				<NickInput ref={userRef} />
 				<PhoneInput
 					value={phone}
 					onChange={e => setPhone(e.target.value)}
 				/>
-				<CheckInput />
-				<PasswordInput />
+				<CheckInput ref={checkRef} />
+				<PasswordInput ref={pwdRef} />
 				{isphone ? (
 					<button className='check' onClick={getCheckNumber}>
 						{checkMsg}
@@ -75,7 +95,7 @@ const RegisterForm = props => {
 					''
 				)}
 			</Center>
-			<RegisterButton>注册</RegisterButton>
+			<RegisterButton onClick={handleRegister}>注册</RegisterButton>
 			<span className='iconfont icon-ren'></span>
 			<span className='iconfont icon-mima'></span>
 			<span className='iconfont icon-webicon205'></span>

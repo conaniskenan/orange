@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 21:02:19
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-17 21:25:13
+ * @LastEditTime: 2021-05-23 23:05:29
  * @FilePath: /orange/src/pages/home/header/style.js
  */
 import styled from 'styled-components'
@@ -73,6 +73,12 @@ export const NavRight = styled.div`
 		text-align: center;
 		letter-spacing: 5px;
 		text-indent: 5px;
+	}
+	.user {
+		position: absolute;
+		right: 5%;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 `
 export const NavRightSearchWrapper = styled.div`

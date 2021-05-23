@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:05
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-20 23:42:04
+ * @LastEditTime: 2021-05-23 19:34:46
  * @FilePath: /orange/src/pages/newsDetail/content/index.jsx
  */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -44,9 +44,6 @@ const Content = props => {
 					<div>橘子新闻网</div>
 					<div>分类:{state.modelName}</div>
 					<div>发布时间: {getTime(state.createTime)}</div>
-					{/* <div>评论:{state.comment ?? 0}</div>
-					<div>点赞:{state.star ?? 0}</div>
-					<div>投币:{state.coin ?? 0}</div> */}
 				</TitleInfo>
 			</Top>
 			<Text
