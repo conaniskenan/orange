@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-06 16:04:22
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-20 19:51:43
+ * @LastEditTime: 2021-05-25 15:59:59
  * @FilePath: /orange/src/router/index.js
  */
 import { lazy } from 'react'
@@ -20,6 +20,9 @@ const ResetForm = SuspenseCpn(
 	lazy(() => import('pages/login/resetForm'))
 )
 const NewsDetail = SuspenseCpn(lazy(() => import('pages/newsDetail')))
+const User = SuspenseCpn(lazy(() => import('pages/user')))
+const Collect = SuspenseCpn(lazy(() => import('pages/user/collect')))
+const Edit = SuspenseCpn(lazy(() => import('pages/user/edit')))
 const routes = [
 	{
 		path: '/',
@@ -36,6 +39,15 @@ const routes = [
 	{
 		path: '/news/:id',
 		component: NewsDetail,
+	},
+	{
+		path: '/user/:id',
+		component: User,
+		routes: [
+			{ path: '/user/:id/attention' },
+			{ path: '/user/:id/collect', component: Collect },
+			{ path: '/user/:id/edit', component: Edit },
+		],
 	},
 	{
 		path: '/login',

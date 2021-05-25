@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:47
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-20 23:35:19
+ * @LastEditTime: 2021-05-26 00:42:16
  * @FilePath: /orange/src/pages/newsDetail/content/style.js
  */
 import styled from 'styled-components'
@@ -55,13 +55,13 @@ export const Footer = styled.div`
 	width: 100%;
 	margin-top: 3rem;
 	color: #333333;
+	.active {
+		color: red;
+	}
 	.iconfont {
 		padding-right: 5.5rem;
 		font-size: 2.2rem;
 		cursor: pointer;
-		&:hover {
-			color: red;
-		}
 	}
 	.icon {
 		font-size: 2rem;
@@ -70,7 +70,7 @@ export const Footer = styled.div`
 	}
 `
 export const CommentInputWrapper = styled.div`
-	margin-bottom: 30rem;
+	margin-bottom: 20rem;
 `
 export const CommentInput = styled.textarea.attrs({
 	type: 'textarea',
@@ -109,6 +109,12 @@ export const Button = styled.div`
 		background-color: #ef8829;
 		opacity: 0.7;
 	}
+	&.attention {
+		background-color: #3e83fd;
+		color: #ddd;
+		border-radius: 1rem;
+		width: 10rem;
+	}
 	&.cancel {
 		color: #999999;
 		background-color: #ffffff;
@@ -117,5 +123,55 @@ export const Button = styled.div`
 	}
 	&:hover {
 		opacity: 1;
+	}
+`
+export const Comment = styled.div`
+	position: relative;
+	width: 100%;
+	margin-bottom: 7rem;
+	.head {
+		width: 5rem;
+		height: 5rem;
+		border-radius: 50%;
+		border: 1px solid #ddd;
+		overflow: hidden;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.name {
+		position: absolute;
+		top: 1rem;
+		left: 6rem;
+		color: #404040;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.time {
+		position: absolute;
+		top: 3.5rem;
+		left: 6rem;
+		color: #b0b0b0;
+	}
+	.content {
+		width: 90%;
+		position: relative;
+		top: 2rem;
+		left: 6rem;
+		color: #404040;
+		font-size: 1.6rem;
+		letter-spacing: 2px;
+	}
+	.reply {
+		position: absolute;
+		bottom: -5rem;
+		left: 6rem;
+		font-size: 1.4rem;
+		color: #a0a0a0;
+		&:hover {
+			cursor: pointer;
+			font-weight: bold;
+		}
 	}
 `

@@ -4,7 +4,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-23 22:55:26
+ * @LastEditTime: 2021-05-25 14:12:45
  * @FilePath: /orange/src/pages/home/header/index.jsx
  */
 import classnames from 'classnames'
@@ -24,20 +24,25 @@ import {
 } from './style'
 import Logo from 'components/logo'
 import UserName from 'components/userName'
-import { getList, getModelList } from '../store/actionCreators'
-
+import {
+	getList,
+	getModelList,
+} from 'pages/home/store/actionCreators'
+import { getOwn } from 'pages/user/store/actionCreators'
 const Header = memo(props => {
 	const [currentIndex, setCurrentIndex] = useState(-1)
 	const [isFocus, setIsFocus] = useState(false)
-	const { newsPlate } = useSelector(
+	const { newsPlate, ownInformation } = useSelector(
 		state => ({
 			newsPlate: state.getIn(['home', 'newsPlate']),
+			ownInformation: state.getIn(['user', 'ownInformation'])?.toJS(),
 		}),
 		shallowEqual
 	)
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(getList())
+		dispatch(getOwn(0))
 	}, [dispatch])
 	useEffect(() => {
 		let search = props.location.search
@@ -91,8 +96,8 @@ const Header = memo(props => {
 						})}
 					></span>
 				</NavRightSearchWrapper>
-				{localStorage.token ? (
-					<UserName className='user'/>
+				{ownInformation.code === 200 ? (
+					<UserName className='user' />
 				) : (
 					<LoginButton className='loginBtn' onClick={toLogin}>
 						登录

@@ -3,7 +3,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-17 21:29:03
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-20 21:07:24
+ * @LastEditTime: 2021-05-26 01:08:25
  * @FilePath: /orange/src/pages/home/newsInfo/index.jsx
  */
 import React, { memo, useEffect, useState } from 'react'
@@ -53,9 +53,9 @@ const NewsInfo = memo(props => {
 					<div>橘子新闻网</div>
 					<div>分类:{item.modelName}</div>
 					<div>{getTime(item.createTime)}</div>
-					<div>评论:{item.comment ?? 0}</div>
-					<div>点赞:{item.star ?? 0}</div>
-					<div>投币:{item.coin ?? 0}</div>
+					<div>评论:{item.comment}</div>
+					<div>点赞:{item.stars}</div>
+					<div>投币:{item.coins}</div>
 				</Footer>
 			</InfoWrapper>
 		)

@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-16 23:16:39
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-23 20:32:58
+ * @LastEditTime: 2021-05-25 17:13:56
  * @FilePath: /orange/src/api/index.js
  */
 import axios from 'axios'
@@ -26,9 +26,35 @@ axios.interceptors.request.use(
 const instance1 = axios.create({
 	baseURL: process.env.REACT_APP_URL,
 })
+instance1.interceptors.request.use(
+	config => {
+		// * 判断是否存在token，如果存在的话，则每个http header都加上token
+		// * token会在登录之后存储在本地
+		if (localStorage.token) {
+			config.headers['Authorization'] = `Bearer ${localStorage.token}`
+		}
+		return config
+	},
+	err => {
+		return Promise.reject(err)
+	}
+)
 const instance2 = axios.create({
 	baseURL: process.env.REACT_APP_URLP,
 })
+instance2.interceptors.request.use(
+	config => {
+		// * 判断是否存在token，如果存在的话，则每个http header都加上token
+		// * token会在登录之后存储在本地
+		if (localStorage.token) {
+			config.headers['Authorization'] = `Bearer ${localStorage.token}`
+		}
+		return config
+	},
+	err => {
+		return Promise.reject(err)
+	}
+)
 export const get = (url, params = {}) => {
 	return new Promise((resolve, reject) => {
 		instance1
@@ -72,7 +98,9 @@ export const getp = (url, params = {}) => {
 export const postp = (url, params = {}) => {
 	return new Promise((resolve, reject) => {
 		instance2
-			.post(url, params)
+			.post(url, params, {
+				headers: { 'Content-Type': 'multipart/form-data' },
+			})
 			.then(res => {
 				resolve(res.data)
 			})
