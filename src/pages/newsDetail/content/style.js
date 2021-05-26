@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:47
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-26 00:42:16
+ * @LastEditTime: 2021-05-26 23:42:42
  * @FilePath: /orange/src/pages/newsDetail/content/style.js
  */
 import styled from 'styled-components'
@@ -139,6 +139,7 @@ export const Comment = styled.div`
 			width: 100%;
 			height: 100%;
 		}
+		cursor: pointer;
 	}
 	.name {
 		position: absolute;
@@ -165,13 +166,23 @@ export const Comment = styled.div`
 	}
 	.reply {
 		position: absolute;
-		bottom: -5rem;
 		left: 6rem;
 		font-size: 1.4rem;
 		color: #a0a0a0;
+		margin-top: 5rem;
 		&:hover {
 			cursor: pointer;
 			font-weight: bold;
+		}
+	}
+	.replyone {
+		width: 50%;
+		height: 10rem;
+		position: relative;
+		bottom: 0;
+		left: 6rem;
+		textarea {
+			height: 10rem;
 		}
 	}
 `

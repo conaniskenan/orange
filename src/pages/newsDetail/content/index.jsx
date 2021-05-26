@@ -4,7 +4,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:05
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-26 01:24:32
+ * @LastEditTime: 2021-05-27 00:12:30
  * @FilePath: /orange/src/pages/newsDetail/content/index.jsx
  */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -38,12 +38,15 @@ const Content = props => {
 	const [coinNum, setCoinNum] = useState(0)
 	const [news, setNews] = useState([])
 	const [comment, setComment] = useState([])
+	const [isReply, setIsReply] = useState(false)
 	const refInput = useRef(null)
+	const replyInput = useRef(null)
 	const newsID = parseInt(props.match.url.replace(/\/news\//, ''))
 	const dispatch = useDispatch()
-	const { newsContent } = useSelector(
+	const { newsContent, ownInformation } = useSelector(
 		state => ({
 			newsContent: state.getIn(['home', 'newsContent']),
+			ownInformation: state.getIn(['user', 'ownInformation'])?.toJS(),
 		}),
 		shallowEqual
 	)
@@ -73,12 +76,11 @@ const Content = props => {
 	useEffect(() => {
 		dispatch(getnewsContent(news?.body))
 	}, [dispatch, news])
-	const handleSubmit = () => {
-		addComment({ id: newsID, content: refInput.current.value })
-		refInput.current.value = ''
-		SetRefresh(refresh + 1)
-	}
+
 	const handleCollect = () => {
+		if (!localStorage.token) {
+			return false
+		}
 		if (collect === '收藏') {
 			userIsCollect({
 				id: newsID,
@@ -95,12 +97,16 @@ const Content = props => {
 	}
 	const handleStar = () => {
 		if (!localStorage.token) {
-			return
+			return false
 		}
 		if (!star) {
 			userIsStar({
 				id: newsID,
 				flag: true,
+			}).then(res => {
+				if (res.code !== 200) {
+					return false
+				}
 			})
 			setStar(true)
 			setStarNum(starNum + 1)
@@ -131,14 +137,33 @@ const Content = props => {
 			})
 		}
 	}
+	const handleReply = id => {
+		setIsReply(id)
+	}
+	const handleSubmit = () => {
+		SetRefresh(refresh + 1)
+		addComment({ id: newsID, content: refInput.current.value })
+		refInput.current.value = ''
+	}
+	const handleReplySubmit = id => {
+		SetRefresh(refresh + 1)
+		addComment({
+			id: newsID,
+			content: replyInput.current.value,
+			parentId: id,
+		})
+		replyInput.current.value = ''
+	}
 	return (
 		<ContentWrapper>
 			<Top>
-				<Title>{state?.title}</Title>
+				<Title>{state?.title ?? news.title}</Title>
 				<TitleInfo>
 					<div>橘子新闻网</div>
-					<div>分类:{state?.modelName}</div>
-					<div>发布时间: {getTime(state?.createTime)}</div>
+					<div>分类:{state?.modelName ?? news.modelName}</div>
+					<div>
+						发布时间: {getTime(state?.createTime ?? news.createTime)}
+					</div>
 				</TitleInfo>
 			</Top>
 			<Text
@@ -157,7 +182,7 @@ const Content = props => {
 					onClick={handleStar}
 				>
 					<span className={classnames('icon')}>
-						{starNum ?? state.stars}
+						{starNum ?? state.stars ?? news.stars}
 					</span>
 				</span>
 				<span
@@ -166,7 +191,9 @@ const Content = props => {
 					})}
 					onClick={handleCoin}
 				>
-					<span className='icon'>{coinNum ?? state.coins}</span>
+					<span className='icon'>
+						{coinNum ?? state.coins ?? news.coins}
+					</span>
 				</span>
 			</Footer>
 			<Button className='attention' onClick={handleCollect}>
@@ -189,16 +216,54 @@ const Content = props => {
 			{comment?.map(item => {
 				return (
 					<Comment key={item.id}>
-						<div className='head'>
+						<div
+							className='head'
+							onClick={() =>
+								props.history.push(`/user/${item.userId}`)
+							}
+						>
 							<img
 								src={`${process.env.REACT_APP_URLP}/file/get/picture/${item?.photo}`}
 								alt=''
 							/>
 						</div>
-						<div className='name'>{item?.name}</div>
+						<div className='name'>
+							{item?.name}
+							{item.userId === ownInformation?.info?.id
+								? ' (我)'
+								: ''}
+						</div>
 						<div className='time'>{getTime(item?.createTime)}</div>
 						<div className='content'>{item?.Content}</div>
-						<div className='reply'>回复</div>
+						{item.userId !== ownInformation?.info?.id && (
+							<div
+								className='reply'
+								onClick={e => handleReply(item.id)}
+							>
+								回复
+							</div>
+						)}
+
+						{isReply === item.id && (
+							<CommentInputWrapper className='replyone'>
+								<CommentInput ref={replyInput}></CommentInput>
+								<Button
+									className='cancel'
+									onClick={() => {
+										replyInput.current.value = ''
+										setIsReply(false)
+									}}
+								>
+									取消
+								</Button>
+								<Button
+									className='commit'
+									onClick={e => handleReplySubmit(item.id)}
+								>
+									发布
+								</Button>
+							</CommentInputWrapper>
+						)}
 					</Comment>
 				)
 			})}

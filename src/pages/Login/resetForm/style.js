@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:54
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-08 19:47:30
- * @FilePath: /orange/src/components/resetForm/style.js
+ * @LastEditTime: 2021-05-26 18:51:27
+ * @FilePath: /orange/src/pages/login/resetForm/style.js
  */
 import styled from 'styled-components'
 
@@ -119,7 +119,7 @@ export const CheckInput = styled.input.attrs({
 	top: 5rem;
 `
 export const PasswordInput = styled.input.attrs({
-	type: 'text',
+	type: 'password',
 	placeholder: '请输入新密码',
 })`
 	border-bottom: none !important;

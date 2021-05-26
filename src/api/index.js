@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-16 23:16:39
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-25 17:13:56
+ * @LastEditTime: 2021-05-26 18:26:51
  * @FilePath: /orange/src/api/index.js
  */
 import axios from 'axios'
@@ -39,6 +39,18 @@ instance1.interceptors.request.use(
 		return Promise.reject(err)
 	}
 )
+instance1.interceptors.response.use(response => {
+	// 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
+	// 否则的话抛出错误
+	if (response.status === 200) {
+		if (response.data.code === 401) {
+			localStorage.removeItem('token')
+		}
+		return Promise.resolve(response)
+	} else {
+		return Promise.reject(response)
+	}
+})
 const instance2 = axios.create({
 	baseURL: process.env.REACT_APP_URLP,
 })

@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-16 23:47:02
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-26 00:58:15
+ * @LastEditTime: 2021-05-26 23:16:43
  * @FilePath: /orange/src/api/news/index.js
  */
 import { get, getp, post } from '@/api'
@@ -33,4 +33,7 @@ export const getNewsComment = data => {
 
 export const addComment = data => {
 	return post('/token/comment/insert', data)
+}
+export const newsSearch = data => {
+	return post('/token/search', data)
 }

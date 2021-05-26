@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-23 20:31:31
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-25 23:32:36
+ * @LastEditTime: 2021-05-26 19:39:59
  * @FilePath: /orange/src/api/users/index.js
  */
 import { get, post, postp } from '@/api'
@@ -16,6 +16,9 @@ export const register = data => {
 export const login = data => {
 	return post('/login/normal', data)
 }
+export const reset = data => {
+	return post('/forget', data)
+}
 export const getUserInfo = id => {
 	return get(`/token/user/information/${id}`)
 }
@@ -26,7 +29,7 @@ export const userBlack = data => {
 	return post('/token/admin/user/set', data)
 }
 export const userIdol = () => {
-	return post('/token/user/idol', { begin: 0, count: 10 })
+	return get('/token/user/idol', { begin: 0, count: 10 })
 }
 export const userCollections = () => {
 	return get('/token/user/news', { begin: 0, count: 10 })

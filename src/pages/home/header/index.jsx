@@ -4,7 +4,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-05 18:12:08
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-25 14:12:45
+ * @LastEditTime: 2021-05-26 22:58:54
  * @FilePath: /orange/src/pages/home/header/index.jsx
  */
 import classnames from 'classnames'
@@ -61,6 +61,11 @@ const Header = memo(props => {
 	const toLogin = () => {
 		props.history.push('/login')
 	}
+	const handleEnter = e => {
+		if (e.nativeEvent.keyCode === 13) {
+			props.history.push(`/news/search?search=${e.target.value}`)
+		}
+	}
 	return (
 		<NavWrapper>
 			<NavLeft>
@@ -88,6 +93,7 @@ const Header = memo(props => {
 					<NavRightSearch
 						onFocus={() => handleFocus(true)}
 						onBlur={() => handleFocus(false)}
+						onKeyDown={e => handleEnter(e)}
 						className={classnames({ focus: isFocus })}
 					/>
 					<span

@@ -39,6 +39,7 @@ const UserName = props => {
 								userId: ownInformation?.info?.id,
 							},
 						})
+						props.history.go(0)
 					}}
 				>
 					个人中心

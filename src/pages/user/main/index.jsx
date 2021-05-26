@@ -12,10 +12,9 @@ import {
 import { useDispatch, useSelector, shallowEqual } from 'react-redux'
 import { getUser } from 'pages/user/store/actionCreators'
 import { getTime } from '@/utils'
-import { userAttention, userBlack } from '@/api/users'
+import { userAttention } from '@/api/users'
 const Main = props => {
 	const [attention, setAttention] = useState('关注')
-	const [black, setBlack] = useState('拉黑')
 	const { userInformation } = useSelector(
 		state => ({
 			userInformation: state
@@ -32,22 +31,9 @@ const Main = props => {
 		if (attention === '关注') {
 			userAttention({ id: userInformation.info?.id, flag: true })
 			setAttention('取消关注')
-			userBlack({ id: userInformation.info?.id, flag: false })
-			setBlack('拉黑')
 		} else {
 			userAttention({ id: userInformation.info?.id, flag: false })
 			setAttention('关注')
-		}
-	}
-	const handleBlack = () => {
-		if (black === '拉黑') {
-			userBlack({ id: userInformation.info?.id, flag: true })
-			setBlack('取消拉黑')
-			userAttention({ id: userInformation.info?.id, flag: false })
-			setAttention('关注')
-		} else {
-			userBlack({ id: userInformation.info?.id, flag: false })
-			setBlack('拉黑')
 		}
 	}
 	return (
@@ -71,17 +57,29 @@ const Main = props => {
 						个人介绍:
 						{userInformation.info?.introduce ?? '写点什么吧...'}
 					</div>
-					<div>关注:{userInformation.info?.idol ?? 0}</div>
 					<div
 						onClick={() => {
-							props.history.push(
-								`/user/${userInformation.info?.id}/collect`
-							)
+							if (userInformation.isMe) {
+								props.history.replace(
+									`/user/${userInformation.info?.id}/attention`
+								)
+							}
+						}}
+					>
+						关注:{userInformation.info?.Idol ?? 0}
+					</div>
+					<div
+						onClick={() => {
+							if (userInformation.isMe) {
+								props.history.push(
+									`/user/${userInformation.info?.id}/collect`
+								)
+							}
 						}}
 					>
 						收藏:{userInformation.info?.collect ?? 0}
 					</div>
-					<div>粉丝:{userInformation.info?.fans ?? 0}</div>
+					<div>粉丝:{userInformation.info?.Fans ?? 0}</div>
 					<div>硬币:{userInformation.info?.coin ?? 0}</div>
 				</TopRight>
 				{userInformation.isMe && (
@@ -98,7 +96,7 @@ const Main = props => {
 				{!userInformation.isMe && (
 					<>
 						<Button onClick={handleAttention}>{attention}</Button>
-						<Button onClick={handleBlack}>{black}</Button>
+						{/* <Button onClick={handleBlack}>{black}</Button> */}
 					</>
 				)}
 			</Top>
