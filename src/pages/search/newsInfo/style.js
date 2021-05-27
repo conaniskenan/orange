@@ -2,8 +2,8 @@
  * @Author: hypocrisy
  * @Date: 2021-05-17 21:29:13
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-18 00:03:25
- * @FilePath: /orange/src/pages/home/newsInfo/style.js
+ * @LastEditTime: 2021-05-27 15:56:04
+ * @FilePath: /orange/src/pages/search/newsInfo/style.js
  */
 import styled from 'styled-components'
 
@@ -11,6 +11,10 @@ export const InfoWrapper = styled.div`
 	border-bottom: 1px solid #f0f0f0;
 	position: relative;
 	cursor: pointer;
+	width: 50%;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 8rem;
 	box-sizing: border-box;
 	overflow: hidden;
 	&:hover {

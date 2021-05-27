@@ -13,12 +13,13 @@ const Edit = props => {
 		shallowEqual
 	)
 	const handleUpdate = () => {
+		let preHead = ownInformation.info.head
 		userUpdate({
 			name:
 				userRef.current.value === ''
 					? ownInformation.info?.name
 					: userRef.current.value,
-			head: head,
+			head: head ? head : preHead,
 			introduce:
 				introduceRef.current.value === ''
 					? ownInformation.info?.introduce

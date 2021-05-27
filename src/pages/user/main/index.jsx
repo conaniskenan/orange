@@ -26,7 +26,15 @@ const Main = props => {
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(getUser(props.match.url.replace(/\/user\//, '')))
+		setAttention(
+			userInformation.info?.isAttention ? '取消关注' : '关注'
+		)
 	}, [dispatch])
+	useEffect(() => {
+		setAttention(
+			userInformation.info?.isAttention ? '取消关注' : '关注'
+		)
+	}, [userInformation.info?.isAttention])
 	const handleAttention = () => {
 		if (attention === '关注') {
 			userAttention({ id: userInformation.info?.id, flag: true })
