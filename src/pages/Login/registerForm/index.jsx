@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-08 13:57:11
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-24 00:27:39
+ * @LastEditTime: 2021-05-29 00:10:28
  * @FilePath: /orange/src/pages/login/registerForm/index.jsx
  */
 import React, { useEffect, useState, useRef } from 'react'
@@ -53,7 +53,6 @@ const RegisterForm = props => {
 		checkNumber(phone)
 	}
 	const handleRegister = () => {
-		console.log(123)
 		register({
 			name: userRef.current.value,
 			password: pwdRef.current.value,

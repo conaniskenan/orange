@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-07 21:53:54
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-23 21:05:01
+ * @LastEditTime: 2021-05-29 00:18:04
  * @FilePath: /orange/src/pages/login/loginForm/style.js
  */
 import styled from 'styled-components'
@@ -70,7 +70,19 @@ export const Center = styled.div`
 	left: 50%;
 	transform: translateX(-50%);
 	top: 28%;
-
+	.check {
+		color: #fbfbfb;
+		position: absolute;
+		right: 4.5rem;
+		top: 5.7rem;
+		height: 3.4rem;
+		line-height: 3.4rem;
+		background-color: #3992ce;
+		border: 1px solid #3992ce;
+		border-radius: 1.5rem;
+		opacity: 1;
+		cursor: pointer;
+	}
 	> input {
 		font-size: 1.6rem;
 		width: 80%;
@@ -94,13 +106,13 @@ export const Center = styled.div`
 `
 export const PhoneInput = styled.input.attrs({
 	type: 'text',
-	placeholder: '用户名',
+	placeholder: '用户名或手机号',
 })`
 	border-bottom: none !important;
 `
 export const PasswordInput = styled.input.attrs({
 	type: 'password',
-	placeholder: '密码',
+	placeholder: '密码或短信验证码',
 })`
 	top: 5rem;
 `

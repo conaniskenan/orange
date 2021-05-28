@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-25 15:06:16
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-26 19:47:44
+ * @LastEditTime: 2021-05-29 00:03:54
  * @FilePath: /orange/src/pages/user/attention/style.js
  */
 import styled from 'styled-components'
@@ -17,12 +17,13 @@ export const AttentionWrapper = styled.div`
 export const User = styled.div`
 	position: relative;
 	width: 100%;
+	height: 5rem;
 	margin-bottom: 2rem;
 	.head {
 		width: 5rem;
 		height: 5rem;
 		border-radius: 50%;
-		border: 1px solid #ddd;
+		border: 1px solid transparent;
 		overflow: hidden;
 		position: absolute;
 		left: 16.8rem;
