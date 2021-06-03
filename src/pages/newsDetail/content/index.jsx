@@ -4,7 +4,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:05
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 16:46:29
+ * @LastEditTime: 2021-06-04 03:52:03
  * @FilePath: /orange/src/pages/newsDetail/content/index.jsx
  */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -24,6 +24,7 @@ import {
 	Button,
 	CommentInputWrapper,
 	Comment,
+	OtherReply,
 } from './style'
 import { getTime } from '@/utils'
 import { userIsCollect, userIsStar, userIsCoin } from '@/api/users'
@@ -43,7 +44,8 @@ const Content = props => {
 	const [starNum, setStarNum] = useState(0)
 	const [coinNum, setCoinNum] = useState(0)
 	const [news, setNews] = useState([])
-	const [comment, setComment] = useState([])
+	//const [comment, setComment] = useState([])
+	const [comments, setComments] = useState([])
 	const [isReply, setIsReply] = useState(false)
 	const refInput = useRef(null)
 	const replyInput = useRef(null)
@@ -63,14 +65,7 @@ const Content = props => {
 		getNewsById(newsID).then(res => {
 			setNews(res.info)
 		})
-		getNewsComment({
-			begin: 0,
-			count: 25,
-			newsId: newsID,
-			parentId: 0,
-		}).then(res => {
-			setComment(res.list)
-		})
+		getAllComments(0)
 	}, [refresh])
 	useEffect(() => {
 		setCollect(news?.isCollect ? '取消收藏' : '收藏')
@@ -82,7 +77,6 @@ const Content = props => {
 	useEffect(() => {
 		dispatch(getnewsContent(news?.body))
 	}, [dispatch, news])
-
 	const handleCollect = () => {
 		if (!localStorage.token) {
 			return false
@@ -173,66 +167,41 @@ const Content = props => {
 			parentId: id,
 		})
 		replyInput.current.value = ''
+		setIsReply(false)
 	}
-	const renderComment = parentId => {
-		console.log('执行')
+	const getAllComments = parentId => {
 		getNewsComment({
 			begin: 0,
 			count: 10,
 			newsId: newsID,
 			parentId: parentId,
 		}).then(res => {
-			setComment(res.list)
-		})
-		return comment?.map(item => {
-			return (
-				<Comment key={item.id}>
-					<div
-						className='head'
-						onClick={() => props.history.push(`/user/${item.userId}`)}
-					>
-						<img
-							src={`${process.env.REACT_APP_URLP}/file/get/picture/${item?.photo}`}
-							alt=''
-						/>
-					</div>
-					<div className='name'>
-						{item?.name}
-						{item.userId === ownInformation?.info?.id ? ' (我)' : ''}
-					</div>
-					<div className='time'>{getTime(item?.createTime)}</div>
-					<div className='content'>{item?.Content}</div>
-					{item.userId !== ownInformation?.info?.id && (
-						<div
-							className='reply'
-							onClick={e => handleReply(item.id)}
-						>
-							回复
-						</div>
-					)}
-					<div>{renderComment(item.id)}</div>
-					{isReply === item.id && (
-						<CommentInputWrapper className='replyone'>
-							<CommentInput ref={replyInput}></CommentInput>
-							<Button
-								className='cancel'
-								onClick={() => {
-									replyInput.current.value = ''
-									setIsReply(false)
-								}}
-							>
-								取消
-							</Button>
-							<Button
-								className='commit'
-								onClick={e => handleReplySubmit(item.id)}
-							>
-								发布
-							</Button>
-						</CommentInputWrapper>
-					)}
-				</Comment>
-			)
+			let list = res.list //全部一级评论
+			if (list !== null) {
+				list.forEach(item => {
+					if (item.parentId !== undefined) {
+						setComments(preComments => {
+							let result = [...preComments]
+							result.forEach(item2 => {
+								let s = JSON.stringify(item2)
+								if (s.includes(`"id":${item.parentId}`)) {
+									item2.children.push(item)
+								}
+							})
+							return [...result]
+						})
+					}
+					if (item.parentId === undefined) {
+						list.forEach(item1 => {
+							item1.children = []
+						})
+						setComments([...list])
+					}
+					if (item.count) {
+						getAllComments(item.id)
+					}
+				})
+			}
 		})
 	}
 	return (
@@ -294,7 +263,7 @@ const Content = props => {
 					发布
 				</Button>
 			</CommentInputWrapper>
-			{comment?.map(item => {
+			{comments?.map(item => {
 				return (
 					<Comment key={item.id}>
 						<div
@@ -308,38 +277,42 @@ const Content = props => {
 								alt=''
 							/>
 						</div>
+
 						<div className='name'>
 							{item?.name}
 							{item.userId === ownInformation?.info?.id
 								? ' (我)'
 								: ''}
 						</div>
-						<div className='time'>{getTime(item?.createTime)}</div>
 						<div className='content'>{item?.Content}</div>
-						{item.userId === ownInformation?.info?.id && (
-							<div
-								className='delete'
-								onClick={e => handleDelete(item.id)}
-							>
-								删除
-							</div>
-						)}
-						{item.userId !== ownInformation?.info?.id && (
-							<div
-								className='reply'
-								onClick={e => handleReply(item.id)}
-							>
-								回复
-							</div>
-						)}
-						{item.userId !== ownInformation?.info?.id && (
-							<div
-								className='report'
-								onClick={e => handleReport(item.id)}
-							>
-								举报
-							</div>
-						)}
+						<div>
+							<div className='time'>{getTime(item?.createTime)}</div>
+							{item.userId === ownInformation?.info?.id && (
+								<div
+									className='delete'
+									onClick={e => handleDelete(item.id)}
+								>
+									删除
+								</div>
+							)}
+							{item.userId !== ownInformation?.info?.id && (
+								<div
+									className='reply'
+									onClick={e => handleReply(item.id)}
+								>
+									回复
+								</div>
+							)}
+							{item.userId !== ownInformation?.info?.id && (
+								<div
+									className='report'
+									onClick={e => handleReport(item.id)}
+								>
+									举报
+								</div>
+							)}
+						</div>
+
 						{isReply === item.id && (
 							<CommentInputWrapper className='replyone'>
 								<CommentInput ref={replyInput}></CommentInput>
@@ -360,6 +333,81 @@ const Content = props => {
 								</Button>
 							</CommentInputWrapper>
 						)}
+						{item.children.map(item => {
+							return (
+								<OtherReply key={item.id}>
+									<div
+										className='head'
+										onClick={() =>
+											props.history.push(`/user/${item.userId}`)
+										}
+									>
+										<img
+											src={`${process.env.REACT_APP_URLP}/file/get/picture/${item?.photo}`}
+											alt=''
+										/>
+									</div>
+									<div className='name'>
+										{item?.name}
+										{item.userId === ownInformation?.info?.id
+											? ' (我)'
+											: ''}
+									</div>
+									<div className='content'>
+										回复
+										<span className='huifu'>{item.parentName}</span>:
+										{item?.Content}
+									</div>
+									<div className='time'>
+										{getTime(item?.createTime)}
+									</div>
+									{item.userId === ownInformation?.info?.id && (
+										<div
+											className='delete'
+											onClick={e => handleDelete(item.id)}
+										>
+											删除
+										</div>
+									)}
+									{item.userId !== ownInformation?.info?.id && (
+										<div
+											className='reply'
+											onClick={e => handleReply(item.id)}
+										>
+											回复
+										</div>
+									)}
+									{item.userId !== ownInformation?.info?.id && (
+										<div
+											className='report'
+											onClick={e => handleReport(item.id)}
+										>
+											举报
+										</div>
+									)}
+									{isReply === item.id && (
+										<CommentInputWrapper className='replyone'>
+											<CommentInput ref={replyInput}></CommentInput>
+											<Button
+												className='cancel'
+												onClick={() => {
+													replyInput.current.value = ''
+													setIsReply(false)
+												}}
+											>
+												取消
+											</Button>
+											<Button
+												className='commit'
+												onClick={e => handleReplySubmit(item.id)}
+											>
+												发布
+											</Button>
+										</CommentInputWrapper>
+									)}
+								</OtherReply>
+							)
+						})}
 					</Comment>
 				)
 			})}

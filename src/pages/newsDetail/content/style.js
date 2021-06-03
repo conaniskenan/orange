@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-05-20 20:08:47
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-27 16:42:27
+ * @LastEditTime: 2021-06-04 03:49:23
  * @FilePath: /orange/src/pages/newsDetail/content/style.js
  */
 import styled from 'styled-components'
@@ -127,11 +127,13 @@ export const Button = styled.div`
 `
 export const Comment = styled.div`
 	position: relative;
-	width: 100%;
-	margin-bottom: 7rem;
+	width: 90%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-bottom: 2rem;
 	.head {
-		width: 5rem;
-		height: 5rem;
+		width: 4rem;
+		height: 4rem;
 		border-radius: 50%;
 		border: 1px solid transparent;
 		overflow: hidden;
@@ -149,50 +151,47 @@ export const Comment = styled.div`
 		font-size: 1.6rem;
 		font-weight: bold;
 	}
+
+	.content {
+		width: 82%;
+		margin-left: 6rem;
+		color: #404040;
+		font-size: 1.5rem;
+		line-height: 1.9rem;
+		letter-spacing: 2px;
+	}
+	.time {
+		margin-top: 1.5rem;
+		margin-left: 6rem;
+		color: #b0b0b0;
+	}
 	.delete {
-		position: absolute;
-		left: 6rem;
 		font-size: 1.4rem;
+		margin-top: -1.4rem;
+		margin-left: 68rem;
 		color: #a0a0a0;
-		margin-top: 5rem;
 		&:hover {
 			cursor: pointer;
 			font-weight: bold;
 		}
 	}
-
-	.time {
-		position: absolute;
-		top: 3.5rem;
-		left: 6rem;
-		color: #b0b0b0;
-	}
-	.content {
-		width: 90%;
-		position: relative;
-		top: 2rem;
-		left: 6rem;
-		color: #404040;
-		font-size: 1.6rem;
-		letter-spacing: 2px;
-	}
 	.reply {
-		position: absolute;
-		left: 6rem;
+		width: 3rem !important;
 		font-size: 1.4rem;
 		color: #a0a0a0;
-		margin-top: 5rem;
+		margin-top: 1rem;
+		margin-left: 6rem;
 		&:hover {
 			cursor: pointer;
 			font-weight: bold;
 		}
 	}
 	.report {
-		position: absolute;
-		left: 10rem;
+		width: 3rem !important;
 		font-size: 1.4rem;
 		color: #a0a0a0;
-		margin-top: 5rem;
+		margin-top: -1.4rem;
+		margin-left: 10rem;
 		&:hover {
 			cursor: pointer;
 			font-weight: bold;
@@ -202,10 +201,98 @@ export const Comment = styled.div`
 		width: 50%;
 		height: 10rem;
 		position: relative;
-		bottom: 0;
+		bottom: 8rem;
 		left: 6rem;
 		textarea {
 			height: 10rem;
 		}
+		margin-bottom: 11rem;
+	}
+`
+export const OtherReply = styled.div`
+	position: relative;
+	width: 80%;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+	.head {
+		width: 4rem;
+		height: 4rem;
+		border-radius: 50%;
+		border: 1px solid transparent;
+		overflow: hidden;
+		img {
+			width: 100%;
+			height: 100%;
+		}
+		cursor: pointer;
+	}
+	.name {
+		position: absolute;
+		top: 1rem;
+		left: 6rem;
+		color: #404040;
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.huifu {
+		color: #696a6c;
+	}
+	.content {
+		width: 80%;
+		margin-left: 6rem;
+		color: #404040;
+		font-size: 1.5rem;
+		line-height: 1.9rem;
+		letter-spacing: 2px;
+	}
+	.time {
+		margin-top: 1.5rem;
+		margin-left: 6rem;
+		color: #b0b0b0;
+	}
+	.delete {
+		font-size: 1.4rem;
+		margin-top: -1.4rem;
+		margin-left: 59.4rem;
+		width: 3rem;
+		color: #a0a0a0;
+		&:hover {
+			cursor: pointer;
+			font-weight: bold;
+		}
+	}
+	.reply {
+		font-size: 1.4rem;
+		color: #a0a0a0;
+		margin-top: 1rem;
+		margin-left: 6rem;
+		&:hover {
+			cursor: pointer;
+			font-weight: bold;
+		}
+	}
+	.report {
+		width: 3rem;
+		font-size: 1.4rem;
+		color: #a0a0a0;
+		margin-top: -1.4rem;
+		margin-left: 10rem;
+		&:hover {
+			cursor: pointer;
+			font-weight: bold;
+		}
+	}
+	.replyone {
+		width: 50%;
+		height: 10rem;
+		position: relative;
+		bottom: 8rem;
+		left: 6rem;
+		textarea {
+			height: 10rem;
+		}
+		margin-bottom: 11rem;
 	}
 `
